@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>이상형 월드컵 게임</title>
+    <script>
+        // var username = prompt("이름을 입력하세요.");
+
+        var la = document.getElementsByName("la");
+        var arr = document.getElementsByName("food");
+        var rst = document.getElementById("result");
+        var arr2 = new Array();
+
+        function EventL() {
+            var temp = document.getElementById("result2");
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].checked == true) {
+                    arr2[i] = arr[i].value;
+                    //   rst.innerHTML = username+"님이 선택한 것은 "+"<span style='color:orange;'>"+arr[i].value+"</span>";
+                    temp.innerHTML += " " + arr2[i];
+                }
+            }
+
+            for (var i = 0; i < arr.length; i += 2) {
+                la[i].innerHTML = la[i + 2].innerHTML;
+                la[i + 1].innerHTML = la[i + 3].innerHTML;
+            }
+        }
+    </script>
+    <script>
+        function next() {
+            for (var i = 0; i < arr2.length; i++) {
+                if (arr2[i].checked == true) {
+                    arr3[i] = arr2[i].value;
+                    //   rst.innerHTML = username+"님이 선택한 것은 "+"<span style='color:orange;'>"+arr[i].value+"</span>";
+                    // temp.innerHTML += " " + arr3[i];
+                }
+                // for(var i=0;i<arr.length;i+=2){
+                //     la[i].innerHTML = la[i+2].innerHTML;
+                //     la[i+1].innerHTML = la[i+3].innerHTML;
+                //  }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <script>
+
+    </script>
+
+    <h2>가장 먹고 싶은 것 하나만 고르자면?</h2>
+    <hr>
+    <p id="left">게임</p>
+    <p id="right">하기</p>
+    <form>
+        <label name="la">
+            <input type="radio" name="food" value="김치찌개">
+            김치찌개
+            <!--<img src="김치찌개.jpg" width="250"> -->
+        </label>
+        <label name="la">
+            <input type="radio" name="food" value="된장찌개">
+            된장찌개
+            <!--<img src="된장찌개.jpg" width="250"> -->
+        </label>
+        <label name="la" hidden>
+            <input type="radio" name="food" value="짜장면">
+            짜장면
+            <!--<img src="짜장면.jpg" width="250"> -->
+        </label>
+        <label name="la" hidden>
+            <input type="radio" name="food" value="짬뽕">
+            짬뽕
+            <!--<img src="짬뽕.jpg" width="250"> -->
+        </label>
+        <label name="la" hidden>
+            <input type="radio" name="food" value="삼겹살">
+            삼겹살
+            <!--<img src="삼겹살.jpg" width="250"> -->
+        </label>
+        <label name="la" hidden>
+            <input type="radio" name="food" value="막창">
+            막창
+            <!--<img src="막창.jpg" width="250"> -->
+        </label>
+        <label name="la" hidden>
+            <input type="radio" name="food" value="피자">
+            피자
+            <!--<img src="피자.jpg" width="250"> -->
+        </label>
+        <label name="la" hidden>
+            <input type="radio" name="food" value="치킨">
+            치킨
+            <!--<img src="치킨.jpg" width="250"> -->
+        </label>
+        <br>
+        <p>
+            <input type="button" value="선택하기" onclick="EventL()">
+            <input type="button" value="다음라운드" onclick="next()">
+    </form>
+    <br>
+    <p>결과:&nbsp;<span id="result"></span></p>
+    <p>총:&nbsp;<span id="result2"></span></p>
+
+</body>
+
+</html>

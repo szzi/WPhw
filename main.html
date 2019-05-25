@@ -1,0 +1,209 @@
+<html>
+
+<head>
+    <title>이상형 월드컵 게임 과제</title>
+    <style>
+        @font-face {
+            font-family: 'BMDOHYEON';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1 {
+            font-family: BMDOHYEON;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        .title {
+            margin: 50px 30px;
+        }
+
+        .container {
+            font-family: BMDOHYEON;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+
+        .s {
+            flex: 1;
+            text-align: center;
+            margin: 50px 30px;
+            width: 465px;
+            height: 349px;
+            background-color: #FBEFFB;
+        }
+    </style>
+</head>
+
+<body>
+    <span class="title">
+        <h1>오늘 점심 뭐 먹지?</h1>
+        <hr>
+    </span>
+
+
+    <!-- 선택 -->
+    <form action="">
+        <div class="container">
+            <div>
+                <img class="s" id="img1" src="images/doobu.jpg" alt="사진1"><br>
+                <label><input name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>
+
+            </div>
+            <div>
+                <img class="s" id="img2" src="images/bulgogi.jpg" alt="사진2"><br>
+                <label><input name="food" type="radio" value="불고기백반">불고기 백반</label>
+
+            </div>
+            <!-- <div>
+                <img class="s" id="img1"  src="images/zazang.jpg" alt="짜장" class="s"><br>
+                <label><input  name="food" type="radio" value="짜장">짜장</label>
+                
+            </div>
+            <div>
+                <img class="s" id="img2" src="images/zzambbong.jpg" alt="짬뽕" class="s"><br>              
+                <label><input name="food" type="radio" value="짬뽕">짬뽕</label>
+            </div>
+            <div>
+                <img class="s" id="img1"  src="images/noodles.jpg" alt="냉모밀" class="s"><br>  
+                <label><input name="food" type="radio" value="냉모밀">냉모밀</label>
+                
+            </div>
+            <div>
+                <img class="s" id="img2" src="images/sushi.jpg" alt="초밥" class="s"><br>
+                <label><input name="food" type="radio" value="초밥">초밥</label>
+                
+            </div>
+            <div>
+                <img class="s" id="img1"  src="images/bokki.jpg" alt="떡볶이" class="s"><br>
+                <label><input name="food" type="radio" value="떡볶이">떡볶이</label>
+                
+            </div>
+            <div>
+                <img class="s" id="img2" src="images/Burrito.jpg" alt="부리또" class="s"><br>  
+                <label><input name="food" type="radio" value="부리또">부리또</label>
+            </div> -->
+
+            <!-- button -->
+            <div>
+                <input type="button" value="Next" onclick="change()">
+            </div>
+
+        </div>
+
+    </form>
+    <!-- 선택 끝 -->
+
+    <!-- 유저 이름 받는 script -->
+    <script>
+        // document.write(window.location.href+"<br>");
+        var temp = window.location.href;
+        var str_ary = temp.split("?");
+        var Username = str_ary[1].split("=");
+    // document.write(Username[1]+"님의 방문을 환영합니다");
+    // 현재 userID[1]이 username임
+    </script>
+    <!-- 유저 이름 끝 -->
+
+    <!-- 버튼 체크 -->
+    <script>
+        function buttonchecked() {
+            var found = null;
+            // radio button name속성으로 받고, 이건 배열로 저장된댕
+            var select = document.getElementsByName("food");
+
+
+            for (var i = 0; i < select.length; i++) {
+                if (select[i].checked == true)
+                    found = select[i];
+            }
+
+            if (found != null)
+                alert(found.value + "을(를) 선택하셨습니다");
+            else
+                alert("선택된 것이 없음");
+        }
+    </script>
+
+    <!-- 버튼, image change() -->
+    <script>
+        function change() {
+            imgchange();
+            buttonchange();
+        }
+    </script>
+
+    <!-- image change -->
+    <script>
+        var files = ["images/doobu.jpg",
+            "images/bulgogi.jpg",
+            "images/zzambbong.jpg",
+            "images/zazang.jpg",
+            "images/noodles.jpg",
+            "images/sushi.jpg",
+            "images/bokki.jpg",
+            "images/Burrito.jpg"];
+
+        var imgs = new Array();
+        for (var i = 0; i < files.length; i++) {
+            imgs[i] = new Image(); // 이미지 객체 생성
+            imgs[i].src = files[i]; // 이미지 로딩
+        }
+
+        var next = 2;
+        function imgchange() {
+            var img1 = document.getElementById("img1");
+            var img2 = document.getElementById("img2");
+            img1.src = imgs[next++].src; // 이미지 변경
+            img2.src = imgs[next++].src;
+            next %= imgs.length; // 개수를 넘으면 처음으로
+        }
+    </script>
+    <!-- image change 끝 -->
+
+    <!-- button change  -->
+    <script>
+        var btn = ["순두부찌개백반",
+            "불고기백반",
+            "짜장",
+            "짬뽕",
+            "냉모밀",
+            "초밥",
+            "떡볶이",
+            "부리또"];
+
+        // var tag=[
+        // '<input id="select1" type="radio" value="순두부찌개백반">',
+        // '<input id="select2" type="radio" value="불고기백반">',
+        // '<input id="select1" type="radio">',
+        // '<input id="select2" type="radio">',
+        // '<input id="select1" type="radio">',
+        // '<input id="select2" type="radio">',
+        // '<input id="select1" type="radio">',
+        // '<input id="select2" type="radio">'
+        // ];
+
+        // var i = 0;
+        function buttonchange() {
+
+
+
+
+            // food1.value = btn[i++];
+            // console.log(food1.value);
+            // food2.value = btn[i++];
+            // console.log(food2.value);
+            // i %= btn.length;
+        }
+    </script>
+    <!-- button change 끝 -->
+
+
+</body>
+
+</html>
