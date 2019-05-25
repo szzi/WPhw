@@ -50,44 +50,17 @@
     <!-- 선택 -->
     <form action="">
         <div class="container">
+            <!-- 선택 -->
             <div>
                 <img class="s" id="img1" src="images/doobu.jpg" alt="사진1"><br>
-                <label><input name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>
+                <label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>
 
             </div>
             <div>
                 <img class="s" id="img2" src="images/bulgogi.jpg" alt="사진2"><br>
-                <label><input name="food" type="radio" value="불고기백반">불고기 백반</label>
+                <label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="불고기백반">불고기 백반</label>
 
             </div>
-            <!-- <div>
-                <img class="s" id="img1"  src="images/zazang.jpg" alt="짜장" class="s"><br>
-                <label><input  name="food" type="radio" value="짜장">짜장</label>
-                
-            </div>
-            <div>
-                <img class="s" id="img2" src="images/zzambbong.jpg" alt="짬뽕" class="s"><br>              
-                <label><input name="food" type="radio" value="짬뽕">짬뽕</label>
-            </div>
-            <div>
-                <img class="s" id="img1"  src="images/noodles.jpg" alt="냉모밀" class="s"><br>  
-                <label><input name="food" type="radio" value="냉모밀">냉모밀</label>
-                
-            </div>
-            <div>
-                <img class="s" id="img2" src="images/sushi.jpg" alt="초밥" class="s"><br>
-                <label><input name="food" type="radio" value="초밥">초밥</label>
-                
-            </div>
-            <div>
-                <img class="s" id="img1"  src="images/bokki.jpg" alt="떡볶이" class="s"><br>
-                <label><input name="food" type="radio" value="떡볶이">떡볶이</label>
-                
-            </div>
-            <div>
-                <img class="s" id="img2" src="images/Burrito.jpg" alt="부리또" class="s"><br>  
-                <label><input name="food" type="radio" value="부리또">부리또</label>
-            </div> -->
 
             <!-- button -->
             <div>
@@ -177,28 +150,36 @@
             "떡볶이",
             "부리또"];
 
-        // var tag=[
-        // '<input id="select1" type="radio" value="순두부찌개백반">',
-        // '<input id="select2" type="radio" value="불고기백반">',
-        // '<input id="select1" type="radio">',
-        // '<input id="select2" type="radio">',
-        // '<input id="select1" type="radio">',
-        // '<input id="select2" type="radio">',
-        // '<input id="select1" type="radio">',
-        // '<input id="select2" type="radio">'
-        // ];
+        var tag=[
+        '<label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>',
+        '<label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="불고기백반">불고기 백반</label>',
+        '<label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="짜장">짜장</label>',
+        '<label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="짬뽕">짬뽕</label>',
+        '<label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="냉모밀">냉모밀</label>',
+        '<label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="초밥">초밥</label>',
+        '<label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="떡볶이">떡볶이</label>',
+        '<label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="부리또">부리또</label>',
+        ];
 
-        // var i = 0;
+        var i = 2;
+        var j=2;
         function buttonchange() {
+            var select1 = document.getElementById("select1");
+            var select2 = document.getElementById("select2");
+
+            var food1 = document.getElementsByName("food1");
+            var food2 = document.getElementsByName("food2");
+
+            select1.innerHTML = tag[i++];
+            select2.innerHTML = tag[i++];
+            i%=btn.length
 
 
-
-
-            // food1.value = btn[i++];
-            // console.log(food1.value);
-            // food2.value = btn[i++];
-            // console.log(food2.value);
-            // i %= btn.length;
+            food1.value = btn[j++];
+            console.log(food1.value);
+            food2.value = btn[j++];
+            console.log(food2.value);
+            j %= btn.length;
         }
     </script>
     <!-- button change 끝 -->
