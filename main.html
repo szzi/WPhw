@@ -109,12 +109,13 @@
 
     <!-- 버튼 체크 -->
     <script>
-        var count =0;
+        var count =4;
         var select;
         var selectarr = new Array(4);
         var selectarr2 = new Array(2);
-        var winner;
+        var winner=new Array(1);
         var k=0,j=0;
+        var checkround2=2;
         function buttonchecked() {
             var found = null;
             // radio button name속성으로 받고, 이건 배열로 저장된댕
@@ -124,21 +125,27 @@
                 if (select[i].checked == true){
                     found = select[i];
                     //round1 선택된 것
-                    if(round1>0){//round1의 마지막 선택한 값은 round1=1일떄임.그래서 얘도 드가야대
+                    if(count>0){//round1의 마지막 선택한 값은 round1=1일떄임.그래서 얘도 드가야대
+                        //round2 선택된것.
                         selectarr[k++]=select[i];
+                        count--;
                         console.log("아직 8강중......");
                         console.log("8강arr:"+found.id);
+                        console.log("8강 count"+count);
+                       
                     } 
-                    //round2 선택된것.
-                    else if((round1==1)&&(round2>0)){
+                    else if((count==0)&&(round1==1)&&(round2>-1)&&(checkround2>0)){
                         selectarr2[j++] = select[i];
+                        checkround2--;
                         console.log("4강arr:"+selectarr2[j]);
                         console.log("아직 4강중......");
                     }
-                    // else if((round2==1)&&){
-                    //     winner=select[i];
-                    // }
+                    else if((count==0)&&(round1==1)&&(round2==0)&&(checkround2==0)){
+                        winner[0] = select[i];
+                        console.log("내가 winner"+winner[0]);
+                    }
                 }
+               
             }
 
             if (found != null){
@@ -148,6 +155,8 @@
                 console.log(found.id.substring(2,3));
                 console.log("round1:"+round1);
                 console.log("round2:"+round2);
+                console.log("checkround2"+checkround2);
+                console.log("round3:"+round3+"\n\n");
                 // if(round1!=null && round2!=null){
                 //     round1--;
                 // }
@@ -175,18 +184,20 @@
                 target = ["1","2","3","4","5","6","7","8"];
                 show1();   
             }
-            else if((round1==1) && (round2!=0)&&(round3!=0)){
+            else if((round1==1) && (round2!=0) && (round3!=0)){
                 target = [selectarr[0].id.substring(2,3),selectarr[1].id.substring(2,3),selectarr[2].id.substring(2,3),selectarr[3].id.substring(2,3)];
                 show2();
             }
-            // else if((round1==1) && (round2==0) && (round3!=0)){
-            //     target = [selectarr2[0].id.substring(2,3),selectarr2[1].id.substring(2,3)];
-            //     show3();
-            // }
-            // else{
-            //     target = [winner.id.substring(2,3)];
-            //     show3();
-            // }
+            else if((round1==1) && (round2==0) && (round3!=0)){
+                target = [selectarr2[0].id.substring(2,3),selectarr2[1].id.substring(2,3)];
+                show3();
+            }
+            else{
+                target = [winner[0].id.substring(2,3)];
+                hide(bbbefore1);
+                hide(bbbefore2);
+                document.getElementById(target[0]).style.display = 'block';
+            }
             
         }
 
@@ -229,6 +240,7 @@
             bbefore2 = target[iindex];
             document.getElementById(target[iindex++]).style.display = 'block';
             round2--;
+            
         }
 
         var iiindex=0;
