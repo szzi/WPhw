@@ -14,6 +14,8 @@
             font-family: BMDOHYEON;
             font-size: 50px;
             text-align: center;
+            margin-bottom: 0px;
+            margin-top: 20px;
         }
 
         .title {
@@ -43,53 +45,62 @@
             background-color: #FBEFFB;
         }
 
-        input[type="button"] { font-family:BMDOHYEON; font-size: 30px; border: solid 2px black; background-color:white; border-radius: 8px; width: 100px; height:50px;}
+        input[type="button"] {
+            font-family: BMDOHYEON;
+            font-size: 30px;
+            border: solid 2px black;
+            background-color: white;
+            border-radius: 8px;
+            width: 100px;
+            height: 50px;
+        }
     </style>
     <script>
-            function GetCookie (name) {
-                var str = name+"=";
-                var pairs = document.cookie.split(";"); // 쿠키문자열을 ;을 경계로 분할
-                for(var i=0; i<pairs.length; i++) {
-                    var pair = pairs[i].trim(); // 쿠키 앞뒤의 빈칸 제거
-                    var unit = pair.split("=");
-                    if(unit[0] == name)
-                        return unescape(unit[1]);
-                }
-                return null;
+        function GetCookie(name) {
+            var str = name + "=";
+            var pairs = document.cookie.split(";"); // 쿠키문자열을 ;을 경계로 분할
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].trim(); // 쿠키 앞뒤의 빈칸 제거
+                var unit = pair.split("=");
+                if (unit[0] == name)
+                    return unescape(unit[1]);
             }
-            function SetCookie (name, value, expireDate) {
-                var cookieStr = name + "=" + escape(value) + 
-            ((expireDate == null)?"":("; expires=" + expireDate.toGMTString()));
+            return null;
+        }
+        function SetCookie(name, value, expireDate) {
+            var cookieStr = name + "=" + escape(value) +
+                ((expireDate == null) ? "" : ("; expires=" + expireDate.toGMTString()));
             document.cookie = cookieStr;
-            }
-            </script>
+        }
+    </script>
 </head>
 
 <body>
+    <script>
+        var username = GetCookie("username");
+        var count = GetCookie("count");
+        var expire = new Date(); // 현재 시간
+        if (username == null) {
+            count = 0;
+            username = prompt("이름을 입력해 주십시오.", "");
+            if (username == null) {
+                alert("이름을 입력하시면 보다 나은 서비스를 제공받을 수 있습니다.");
+                username = "아무개";
+            } else {
+                expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 1년후 
+                SetCookie("username", username, expire);
+            }
+        }
+        count++;
+        expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 1년후 
+        SetCookie("count", count, expire);
+        document.write('<p>어서오십시오. ' + username + '님의 ' + count + '번째 방문을 환영합니다!');
+    </script>
+
     <span class="title">
         <h1>오늘 점심 뭐 먹지?</h1>
         <hr>
     </span>
-    <script>
-            var username = GetCookie("username");
-            var count = GetCookie("count");
-            var expire = new Date (); // 현재 시간
-            if (username == null) {
-                count = 0;
-                username = prompt("이름을 입력해 주십시오.","");
-                if (username == null) {
-                    alert("이름을 입력하시면 보다 나은 서비스를 제공받을 수 있습니다.");
-                    username = "아무개“;
-                } else {
-                    expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 1년후 
-                    SetCookie("username",username,expire);
-                }
-            }
-            count++;
-            expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 1년후 
-            SetCookie("count",count,expire);
-            document.write('<p>어서오십시오. '+username+'님의 '+count+'번째 방문을 환영합니다!');
-        </script>
     <!-- 선택 -->
     <form action="">
         <div id="r1">
@@ -150,22 +161,12 @@
     </form>
     <!-- 선택 끝 -->
 
-   
-
     <!-- 유저 이름 받는 script -->
-    <script>
-        // document.write(window.location.href+"<br>");
-        var temp = window.location.href;
-        var str_ary = temp.split("?");
-        var Username = str_ary[1].split("=");
-    // document.write(Username[1]+"님의 방문을 환영합니다");
-    // 현재 userID[1]이 username임
-    </script>
     <!-- 유저 이름 끝 -->
 
     <!-- 버튼 체크 -->
     <script>
-        var count = 4;
+        var count1 = 4;
         var select;
         var selectarr = new Array(4);
         var selectarr2 = new Array(2);
@@ -180,16 +181,16 @@
             for (var i = 0; i < select.length; i++) {
                 if (select[i].checked == true) {
                     found = select[i];
-                    if (count > 0) {
+                    if (count1 > 0) {
                         selectarr[k++] = select[i];
-                        count--;
+                        count1--;
                     }
-                    else if ((count == 0) && (round1 == 1) && (round2 > -1) && (checkround2 > 0)) {
+                    else if ((count1 == 0) && (round1 == 1) && (round2 > -1) && (checkround2 > 0)) {
 
                         selectarr2[j++] = select[i];
                         checkround2--;
                     }
-                    else if ((count == 0) && (round1 == 1) && (round2 == 0) && (checkround2 == 0)) {
+                    else if ((count1 == 0) && (round1 == 1) && (round2 == 0) && (checkround2 == 0)) {
                         winner[0] = select[i];
                     }
                 }
@@ -239,12 +240,11 @@
                 hide(bbbefore2);
                 hide("btn");
                 document.getElementById(target[0]).style.display = 'block';
-                alert(Username[1]+"님의 "+"선택은"+winner[0].value+"였습니다");
+                alert(username + "님의 " + count + "번째 선택은 " + winner[0].value + "이었습니다");
             }
 
         }
 
-        var count;
         var index = 2;
         var before1 = null;
         var before2 = null;
