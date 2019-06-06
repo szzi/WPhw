@@ -37,6 +37,7 @@
             height: 349px;
             background-color: #FBEFFB;
         }
+
     </style>
 </head>
 
@@ -51,20 +52,43 @@
     <form action="">
         <div class="container">
             <!-- 선택 -->
-            <div>
-                <img class="s" id="img1" src="images/doobu.jpg" alt="사진1"><br>
-                <label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>
-
+            <div id="1">
+                <img class="s" id="img1" src="images/doobu.jpg" alt="순두부찌개"><br>
+                &nbsp;&nbsp;<label for="ss1"><input id="ss1" name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>
             </div>
-            <div>
-                <img class="s" id="img2" src="images/bulgogi.jpg" alt="사진2"><br>
-                <label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="불고기백반">불고기 백반</label>
-
+            <div id="2">
+                <img class="s" id="img2" src="images/bulgogi.jpg" alt="불고기백반"><br>
+                &nbsp;&nbsp;<label for="ss2"><input id="ss2" name="food" type="radio" value="불고기백반">불고기 백반</label>
             </div>
+            <div id="3" style="display:none;">
+                <img class="s" id="img3" src="images/zazang.jpg" alt="짜장"><br>
+                &nbsp;&nbsp;<label for="ss3"><input id="ss3" name="food" type="radio" value="짜장">짜장</label>
+            </div>
+            <div id="4" style="display:none;">
+                <img class="s" id="img4" src="images/zzambbong.jpg" alt="짬뽕"><br>
+                &nbsp;&nbsp;<label for="ss4"><input id="ss4" name="food" type="radio" value="짬뽕">짬뽕</label>
+            </div>
+            <div id="5" style="display:none;">
+                <img class="s" id="img5" src="images/noodles.jpg" alt="냉모밀"><br>
+                &nbsp;&nbsp;<label for="ss5"><input id="ss5" name="food" type="radio" value="냉모밀">냉모밀</label>
+            </div>
+            <div id="6" style="display:none;">
+                <img class="s" id="img6" src="images/sushi.jpg" alt="초밥"><br>
+                &nbsp;&nbsp;<label for="ss6"><input id="ss6" name="food" type="radio" value="초밥">초밥</label>
+            </div>
+            <div id="7" style="display:none;">
+            <img class="s" id="img7" src="images/bokki.jpg" alt="떡볶이"><br>
+                &nbsp;&nbsp;<label for="ss7"><input id="ss7" name="food" type="radio" value="떡볶이">떡볶이</label>
+            </div>
+            <div id="8" style="display:none;">
+                <img class="s" id="img8" src="images/Burrito.jpg" alt="부리또"><br>
+                &nbsp;&nbsp;<label for="ss8"><input id="ss8" name="food" type="radio" value="부리또">부리또</label>
+            </div>
+
 
             <!-- button -->
             <div>
-                <input type="button" value="Next" onclick="change()">
+                <input type="button" value="Next" onclick="show()">
             </div>
 
         </div>
@@ -85,21 +109,31 @@
 
     <!-- 버튼 체크 -->
     <script>
+        // 8강 승자
+        var round1;
+        // 4강 승자
+        var round2;
+        // 2강 승자
+        var winner;
+
+        var count =0;
         function buttonchecked() {
             var found = null;
             // radio button name속성으로 받고, 이건 배열로 저장된댕
             var select = document.getElementsByName("food");
-
+            
 
             for (var i = 0; i < select.length; i++) {
                 if (select[i].checked == true)
                     found = select[i];
             }
 
-            if (found != null)
+            if (found != null){
                 alert(found.value + "을(를) 선택하셨습니다");
+                change();
+            }  
             else
-                alert("선택된 것이 없음");
+                alert("선택된 것이 없습니다. 선택해주세요!");
         }
     </script>
 
@@ -107,7 +141,7 @@
     <script>
         function change() {
             imgchange();
-            buttonchange();
+            show();
         }
     </script>
 
@@ -115,8 +149,8 @@
     <script>
         var files = ["images/doobu.jpg",
             "images/bulgogi.jpg",
-            "images/zzambbong.jpg",
             "images/zazang.jpg",
+            "images/zzambbong.jpg",
             "images/noodles.jpg",
             "images/sushi.jpg",
             "images/bokki.jpg",
@@ -139,50 +173,32 @@
     </script>
     <!-- image change 끝 -->
 
-    <!-- button change  -->
+    <!-- show  -->
     <script>
-        var btn = ["순두부찌개백반",
-            "불고기백반",
-            "짜장",
-            "짬뽕",
-            "냉모밀",
-            "초밥",
-            "떡볶이",
-            "부리또"];
-
-        var tag=[
-        '<label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>',
-        '<label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="불고기백반">불고기 백반</label>',
-        '<label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="짜장">짜장</label>',
-        '<label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="짬뽕">짬뽕</label>',
-        '<label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="냉모밀">냉모밀</label>',
-        '<label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="초밥">초밥</label>',
-        '<label id="select1" for="ss1"><input id="ss1" name="food" type="radio" value="떡볶이">떡볶이</label>',
-        '<label id="select2" for="ss2"><input id="ss2" name="food" type="radio" value="부리또">부리또</label>',
-        ];
-
-        var i = 2;
-        var j=2;
-        function buttonchange() {
-            var select1 = document.getElementById("select1");
-            var select2 = document.getElementById("select2");
-
-            var food1 = document.getElementsByName("food1");
-            var food2 = document.getElementsByName("food2");
-
-            select1.innerHTML = tag[i++];
-            select2.innerHTML = tag[i++];
-            i%=btn.length
-
-
-            food1.value = btn[j++];
-            console.log(food1.value);
-            food2.value = btn[j++];
-            console.log(food2.value);
-            j %= btn.length;
+        var target = ["1","2","3","4","5","6","7","8"];
+        var index=2;
+        var before1 = null;
+        var before2 = null;
+        function show() {
+            if ((before1 != null) && (before2 != null) ){
+                hide(before1);
+                hide(before2);
+            }
+            if((before1==null && before2==null)){
+                hide("1");
+                hide("2");
+            }
+    
+            before1 = target[index];
+            document.getElementById(target[index++]).style.display = 'block';
+            before2 = target[index];
+            document.getElementById(target[index++]).style.display = 'block';
+        }
+        function hide(target) {
+            document.getElementById(target).style.display = 'none';
         }
     </script>
-    <!-- button change 끝 -->
+    <!-- show 끝 -->
 
 
 </body>
