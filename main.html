@@ -88,7 +88,7 @@
 
             <!-- button -->
             <div>
-                <input type="button" value="Next" onclick="show()">
+                <input type="button" value="Next" onclick="buttonchecked()">
             </div>
 
         </div>
@@ -109,27 +109,51 @@
 
     <!-- 버튼 체크 -->
     <script>
-        // 8강 승자
-        var round1;
-        // 4강 승자
-        var round2;
-        // 2강 승자
-        var winner;
-
         var count =0;
+        var select;
+        var selectarr = new Array(4);
+        var selectarr2 = new Array(2);
+        var winner;
+        var k=0,j=0;
         function buttonchecked() {
             var found = null;
             // radio button name속성으로 받고, 이건 배열로 저장된댕
-            var select = document.getElementsByName("food");
+            select = document.getElementsByName("food");
             
-
             for (var i = 0; i < select.length; i++) {
-                if (select[i].checked == true)
+                if (select[i].checked == true){
                     found = select[i];
+                    //round1 선택된 것
+                    if(round1>0){//round1의 마지막 선택한 값은 round1=1일떄임.그래서 얘도 드가야대
+                        selectarr[k++]=select[i];
+                        console.log("아직 8강중......");
+                        console.log("8강arr:"+found.id);
+                    } 
+                    //round2 선택된것.
+                    else if((round1==1)&&(round2>0)){
+                        selectarr2[j++] = select[i];
+                        console.log("4강arr:"+selectarr2[j]);
+                        console.log("아직 4강중......");
+                    }
+                    // else if((round2==1)&&){
+                    //     winner=select[i];
+                    // }
+                }
             }
 
             if (found != null){
                 alert(found.value + "을(를) 선택하셨습니다");
+                console.log(found.value);
+                console.log(found.id);
+                console.log(found.id.substring(2,3));
+                console.log("round1:"+round1);
+                console.log("round2:"+round2);
+                // if(round1!=null && round2!=null){
+                //     round1--;
+                // }
+                // else if(round1==null && round2!=null){
+                //     round2--;
+                // }
                 change();
             }  
             else
@@ -137,70 +161,103 @@
         }
     </script>
 
-    <!-- 버튼, image change() -->
     <script>
+        // 8강 승자
+        var round1=4;
+        // 4강 승자
+        var round2=2;
+        // 2강 승자
+        var round3=1;
+        var target;
+       
         function change() {
-            imgchange();
-            show();
-        }
-    </script>
-
-    <!-- image change -->
-    <script>
-        var files = ["images/doobu.jpg",
-            "images/bulgogi.jpg",
-            "images/zazang.jpg",
-            "images/zzambbong.jpg",
-            "images/noodles.jpg",
-            "images/sushi.jpg",
-            "images/bokki.jpg",
-            "images/Burrito.jpg"];
-
-        var imgs = new Array();
-        for (var i = 0; i < files.length; i++) {
-            imgs[i] = new Image(); // 이미지 객체 생성
-            imgs[i].src = files[i]; // 이미지 로딩
+            if(round1>1){
+                target = ["1","2","3","4","5","6","7","8"];
+                show1();   
+            }
+            else if((round1==1) && (round2!=0)&&(round3!=0)){
+                target = [selectarr[0].id.substring(2,3),selectarr[1].id.substring(2,3),selectarr[2].id.substring(2,3),selectarr[3].id.substring(2,3)];
+                show2();
+            }
+            // else if((round1==1) && (round2==0) && (round3!=0)){
+            //     target = [selectarr2[0].id.substring(2,3),selectarr2[1].id.substring(2,3)];
+            //     show3();
+            // }
+            // else{
+            //     target = [winner.id.substring(2,3)];
+            //     show3();
+            // }
+            
         }
 
-        var next = 2;
-        function imgchange() {
-            var img1 = document.getElementById("img1");
-            var img2 = document.getElementById("img2");
-            img1.src = imgs[next++].src; // 이미지 변경
-            img2.src = imgs[next++].src;
-            next %= imgs.length; // 개수를 넘으면 처음으로
-        }
-    </script>
-    <!-- image change 끝 -->
-
-    <!-- show  -->
-    <script>
-        var target = ["1","2","3","4","5","6","7","8"];
+        var count;
         var index=2;
         var before1 = null;
         var before2 = null;
-        function show() {
+        function show1() {    
             if ((before1 != null) && (before2 != null) ){
                 hide(before1);
                 hide(before2);
             }
             if((before1==null && before2==null)){
-                hide("1");
-                hide("2");
+                hide(target[0]);
+                hide(target[1]);
             }
     
             before1 = target[index];
             document.getElementById(target[index++]).style.display = 'block';
             before2 = target[index];
             document.getElementById(target[index++]).style.display = 'block';
+            round1--;
         }
+
+        var iindex=0;
+        var bbefore1=null;
+        var bbefore2=null;
+        function show2() {
+            if((bbefore1==null && bbefore2==null)){
+                hide(before1);
+                hide(before2);
+            }
+
+            if ((bbefore1 != null) && (bbefore2 != null) ){
+                hide(bbefore1);
+                hide(bbefore2);
+            }
+            bbefore1 = target[iindex];
+            document.getElementById(target[iindex++]).style.display = 'block';
+            bbefore2 = target[iindex];
+            document.getElementById(target[iindex++]).style.display = 'block';
+            round2--;
+        }
+
+        var iiindex=0;
+        var bbbefore1=null;
+        var bbbefore2=null;
+        function show3() {
+            if((bbbefore1==null && bbbefore2==null)){
+                hide(bbefore1);
+                hide(bbefore2);
+            }
+            
+            if ((bbbefore1 != null) && (bbbefore2 != null) ){
+                hide(bbbefore1);
+                hide(bbbefore2);
+            }
+    
+            bbbefore1 = target[iiindex];
+            document.getElementById(target[iiindex++]).style.display = 'block';
+            bbbefore2 = target[iindex];
+            document.getElementById(target[iiindex++]).style.display = 'block';
+            round3--;
+        }
+
+
         function hide(target) {
             document.getElementById(target).style.display = 'none';
         }
     </script>
     <!-- show 끝 -->
-
-
 </body>
 
 </html>
