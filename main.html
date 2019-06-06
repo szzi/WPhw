@@ -37,6 +37,13 @@
             height: 349px;
             background-color: #FBEFFB;
         }
+
+        .ss1 {
+            text-align: center;
+            background-color: #FBEFFB;
+        }
+
+        input[type="button"] { font-family:BMDOHYEON; font-size: 30px; border: solid 2px black; background-color:white; border-radius: 8px; width: 100px; height:50px;}
     </style>
 </head>
 
@@ -65,7 +72,7 @@
             <!-- 선택 -->
             <div id="1">
                 <img class="s" id="img1" src="images/doobu.jpg" alt="순두부찌개"><br>
-                &nbsp;&nbsp;<label for="ss1"><input id="ss1" name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>
+                <label for="ss1"><input id="ss1" name="food" type="radio" value="순두부찌개백반">순두부찌개 백반</label>
             </div>
             <div id="2">
                 <img class="s" id="img2" src="images/bulgogi.jpg" alt="불고기백반"><br>
@@ -97,7 +104,7 @@
             </div>
 
             <!-- button -->
-            <div>
+            <div id="btn">
                 <input type="button" value="Next" onclick="buttonchecked()">
             </div>
 
@@ -174,24 +181,26 @@
                 show1();
             }
             else if ((round1 == 1) && (round2 != 0) && (round3 != 0)) {
-                document.getElementById("r2").style.display = "block";
                 hide("r1");
+                document.getElementById("r2").style.display = "block";
                 target = [selectarr[0].id.substring(2, 3), selectarr[1].id.substring(2, 3), selectarr[2].id.substring(2, 3), selectarr[3].id.substring(2, 3)];
                 show2();
             }
             else if ((round1 == 1) && (round2 == 0) && (round3 != 0)) {
-                document.getElementById("r3").style.display = "block";
                 hide("r2");
+                document.getElementById("r3").style.display = "block";
                 target = [selectarr2[0].id.substring(2, 3), selectarr2[1].id.substring(2, 3)];
                 show3();
             }
             else if ((round1 == 1) && (round2 == 0) && (round3 == 0)) {
-                document.getElementById("r4").style.display = "block";
                 hide("r3");
+                document.getElementById("r4").style.display = "block";
                 target = [winner[0].id.substring(2, 3)];
                 hide(bbbefore1);
                 hide(bbbefore2);
+                hide("btn");
                 document.getElementById(target[0]).style.display = 'block';
+                alert(Username[1]+"님의 "+"선택은"+winner[0].value+"였습니다");
             }
 
         }
